@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>List of Employees</title>
@@ -13,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Navbar</a>
+        <a class="navbar-brand" th:href="@{/}">Employee Management System</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,9 +28,27 @@
                 <input name="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <li class="d-flex nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+<!--                    <span th:text="${currentUser.firstName}" class="text-primary btn btn-light"></span>-->
+                    <div sec:authentication="name"></div>
+
+
+                </a>
+                <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" th:href="@{/login}">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                </ul>
+            </li>
         </div>
     </div>
 </nav>
+<div th:if="${param.success}" class="alert alert-success">
+    Login Successful</div>
+<div th:if="${param.update}" class="alert alert-success">
+    Update successful </div>
 <div class="container ms-auto my-5">
     <table class="table table-success table-striped">
         <thead>
@@ -57,7 +76,7 @@
                 </tbody>
     </table>
 
-    <p class="btn btn-info"><a th:href="@{/employee/new}">Add Employee</a></p>
+    <a class="text-decoration-none btn btn-info" th:href="@{/employee/new}">Add Employee</a>
 </div>
 
 </body>

@@ -43,8 +43,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(long id) {
+    public void deleteEmployee(Long id) {
         this.employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
     }
 
 }

@@ -33,39 +33,32 @@
                 </a>
                 <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" th:href="@{/login}">Profile</a></li>
-                    <li sec:authorize="!isAuthenticated()"><a class="dropdown-item" th:href="@{/login}">Sign In</a></li>
-                    <li><hr class="dropdown-divider"></li>
                 </ul>
             </li>
         </div>
     </div>
 </nav>
 <div class="container justify-content-center ms-auto my-5">
-    <form role="form" th:action="@{/employee/save}" th:object="${employee}" method="post">
-    <div class="mb-3">
-        <label for="firstName" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}">
+    <div th:if="${param.error}" class="alert alert-danger">
+        Invalid username and password.
     </div>
-    <div class="mb-3">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{lastName}">
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" placeholder="email" th:field="*{email}">
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
-    </div>
-    <div class="mb-3">
-        <label for="city" class="form-label">City</label>
-        <input type="text" class="form-control" id="city" placeholder="City" th:field="*{city}">
-    </div>
+    <div th:if="${param.success}" class="alert alert-success my-5">
+        Registration Successful</div>
+    <h3 class="my-5">Login Here</h3>
+    <form role="form" th:action="@{/login}" method="post">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+        </div>
         <div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Log in">Login</button>
         </div>
     </form>
+    <a th:href="@{/employee/new}" class="text-primary my-4">Don't have an account? Click here</a>
 </div>
 
 </body>

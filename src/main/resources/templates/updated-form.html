@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Update</title>
@@ -13,7 +15,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Navbar</a>
+        <a class="navbar-brand" th:href="@{/}">Employee Management System</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,6 +29,17 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit" th:href>Search</button>
             </form>
+            <li class="d-flex nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
+                </a>
+                <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" th:href="@{/login}">Profile</a></li>
+                    <li sec:authorize="!isAuthenticated()"><a class="dropdown-item" th:href="@{/login}">Sign In</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                </ul>
+            </li>
         </div>
     </div>
 </nav>

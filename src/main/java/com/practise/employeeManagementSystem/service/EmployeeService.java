@@ -13,7 +13,8 @@ public interface EmployeeService {
     List<Employee> getAllEmployees();
     Employee updateEmployee(Employee employee);
     List<Employee> searchEmployees(String query);
-    void deleteEmployee(long id);
 
+    void deleteEmployee(Long id);
 
+    Employee findByEmail(String email);
 }
